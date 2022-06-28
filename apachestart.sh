@@ -25,10 +25,6 @@ DocumentRoot "${DOCROOT}"
 </Directory>
 EOF
 
-if [ x${HTTPSPORT} != "x" ] ; then
-    /usr/local/bin/genhttps.sh
-fi
-
 if [ x${FCGI} != "x" ] ; then
 cat <<EOF > /etc/apache2/conf.d/fcgi.conf
 LoadModule proxy_module /usr/lib/apache2/mod_proxy.so
@@ -42,5 +38,4 @@ LoadModule proxy_fcgi_module /usr/lib/apache2/mod_proxy_fcgi.so
 EOF
 fi
 
-apachectl configtest
 exec /usr/sbin/httpd -DFOREGROUND
