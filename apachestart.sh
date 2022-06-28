@@ -1,9 +1,9 @@
 #!/bin/sh
 
-: "${SERVERNAME:?SERVERNAME needs to be set}"
-: "${SERVERADMIN:?SERVERADMIN needs to be set}"
-: "${HTTPPORT:?HTTPPORT needs to be set}"
-: "${DOCROOT:?DOCROOT needs to be set}"
+: "${SERVERNAME:=unconfigured-apache-server}"
+: "${SERVERADMIN:=admin@example.com}"
+: "${HTTPPORT:=80}"
+: "${DOCROOT:=/var/www/html}"
 
 if [ ! -d $DOCROOT ] ; then
     echo "The Document root DOCROOT=$DOCROOT doesn't exists."
@@ -45,4 +45,3 @@ fi
 
 apachectl configtest
 exec /usr/sbin/httpd -DFOREGROUND
-
