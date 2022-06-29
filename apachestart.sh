@@ -13,6 +13,7 @@ mkdir -p /run/apache2
 chown root.root /etc/ssl/apache2/*
 chmod 600 /etc/ssl/apache2/*
 
+if [ ! -f /etc/apache2/conf.d/01main.conf ] ; then
 cat <<EOF > /etc/apache2/conf.d/01main.conf
 Listen ${HTTPPORT}
 ServerAdmin ${SERVERADMIN}
@@ -24,6 +25,7 @@ DocumentRoot "${DOCROOT}"
     Require all granted
 </Directory>
 EOF
+fi
 
 if [ x${FCGI} != "x" ] ; then
 cat <<EOF > /etc/apache2/conf.d/fcgi.conf
